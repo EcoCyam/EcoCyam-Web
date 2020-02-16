@@ -20,6 +20,7 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/*test*.xml'
+    checkStyleRunAnalysis: true
 - task: CopyFiles@2
   inputs:
     contents: '**/*Api*.jar'
