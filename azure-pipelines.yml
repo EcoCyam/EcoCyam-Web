@@ -21,7 +21,7 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/*test*.xml'
     #checkStyleRunAnalysis: true
-    sonarQubeRunAnalysis: true
+    #sonarQubeRunAnalysis: true
 - task: CopyFiles@2
   inputs:
     contents: '**/*Api*.jar'
