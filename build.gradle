@@ -1,0 +1,4 @@
+allprojects {
+    group = 'upn.miage.ecocyam'
+    version = '0.0.1'
+}
