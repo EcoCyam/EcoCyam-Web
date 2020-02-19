@@ -26,4 +26,4 @@
 /.nb-gradle/
 
 ## INTEGRATION CONTINUE ##
-.circleci
+#.circleci
