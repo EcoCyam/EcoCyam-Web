@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';import { RouterModule } 
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ClipboardModule } from 'ngx-clipboard';
+// import { ClipboardModule } from 'ngx-clipboard';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
@@ -19,7 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    // ClipboardModule
   ],
   declarations: [
     DashboardComponent,
