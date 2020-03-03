@@ -1,0 +1,63 @@
+.slogan{
+  font-weight: 900;
+  font-size: 52px;
+  line-height: 80px;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+.slogan h1 em {
+  font-style: normal;
+}
+
+.slogan-desc{
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0.25px;
+  margin-top: 2em;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+@media (max-width: 991px) {
+  .slogan{
+    font-weight: 900;
+    font-size: 45px;
+    line-height: 80px;
+    letter-spacing: 1px;
+    margin-bottom: 1em;
+    margin-top: 2em;
+  }
+
+  .desc-container{
+    margin-left: 5em;
+    width: 80%;
+  }
+
+  .slogan-desc{
+    font-size: 15px;
+    margin-bottom: 15em;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .slogan{
+    font-size: 30px;
+    line-height: normal;
+    margin-bottom: 2em;
+    margin-top: 2em;
+  }
+
+  .slogan-desc{
+    font-size: 15px;
+    margin-bottom: 10em;
+  }
+
+  .desc-container{
+    margin-left: 1em;
+    width: 90%;
+  }
+}
+
