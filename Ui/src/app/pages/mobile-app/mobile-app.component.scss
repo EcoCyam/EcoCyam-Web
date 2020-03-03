@@ -8,7 +8,6 @@
   font-size: 35px;
   line-height: 80px;
   letter-spacing: 1px;
-  margin-bottom: 30px;
   color: white;
 }
 
@@ -66,3 +65,39 @@
   padding-bottom: 10px;
   color: white;
 }
+
+@media (max-width: 991px) {
+  #features .section-title{
+    margin-top: 2em;
+    font-size: 25px;
+    margin-left: 12em;
+  }
+
+  #features .features-img {
+    width: 75%;
+    margin-top: 5em;
+  }
+
+  #features{
+    padding-bottom: 5em;
+  }
+}
+
+@media (max-width: 767px) {
+  #features .section-title{
+    margin-top: 50px;
+    font-size: 25px;
+    margin-left: 0;
+  }
+
+  #features{
+    padding-bottom: 0;
+  }
+
+  #features .features-img {
+    width: 50%;
+    left: 5em;
+    margin-top: 0;
+  }
+}
+

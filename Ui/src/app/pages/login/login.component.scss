@@ -1,0 +1,15 @@
+.login-seperator{
+  padding-bottom: 100px;
+}
+
+@media (max-width: 991px) {
+  .login-seperator{
+    padding-bottom: 22em;
+  }
+}
+
+@media (max-width: 767px) {
+  .login-seperator{
+    padding-bottom: 18em;
+  }
+}
