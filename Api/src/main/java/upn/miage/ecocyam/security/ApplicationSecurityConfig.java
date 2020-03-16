@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import static upn.miage.ecocyam.security.ApplicationUserPermission.ADMIN_WRITE;
 import static upn.miage.ecocyam.security.ApplicationUserRole.*;
@@ -44,19 +45,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
                 .authorizeRequests()
                 .antMatchers("/","index","/css/*","/js/*").permitAll()
                 .antMatchers("/api/**").hasRole(USER.name())
-                // On utilise la méthode par annnotation dans le controleur @PreAutorize
-//                .antMatchers(HttpMethod.DELETE,"/management/api/**").hasAnyAuthority(ADMIN_WRITE.getPermission())
-//                .antMatchers(HttpMethod.POST,"/management/api/**").hasAnyAuthority(ADMIN_WRITE.getPermission())
-//                .antMatchers(HttpMethod.PUT,"/management/api/**").hasAnyAuthority(ADMIN_WRITE.getPermission())
-//                .antMatchers("/management/api/**").hasAnyRole(ADMIN.name(), ADMINLESSPRIVILEGE.name())
                 .anyRequest()
                 .authenticated()
                 .and()
-                .httpBasic();
+                .formLogin()
+                .loginPage("/login").permitAll();
     }
 
     /**
