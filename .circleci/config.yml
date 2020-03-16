@@ -43,5 +43,5 @@ jobs:
       - run: chmod +x gradlew && ./gradlew build
 
       # store artifacts
-      #- store_artifacts:
-      #    path: ./Api/build/libs/
+      - store_artifacts:
+          path: ./Api/build/libs/
