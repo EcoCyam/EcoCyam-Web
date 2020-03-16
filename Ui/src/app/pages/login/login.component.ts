@@ -28,7 +28,7 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       return;
     }
-    alert(JSON.stringify(this.loginForm.value))
+    alert(JSON.stringify(this.loginForm.value));
     this.router.navigate(['/dashboard']);
   }
 }
