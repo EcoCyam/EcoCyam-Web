@@ -90,6 +90,7 @@
       <!-- Navigation -->
       <ul class="navbar-nav">
           <li *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
+            <a *ngIf="menuItem.title == 'Log out'" (click)="logout()"></a>
               <a routerLinkActive="active" [routerLink]="[menuItem.path]" class="nav-link">
                   <i class="ni {{menuItem.icon}}"></i>
                   {{menuItem.title}}
