@@ -11,6 +11,8 @@ import { IconsComponent } from '../../pages/icons/icons.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {HistoryComponent} from "../../pages/history/history.component";
+import {SnackbarModule} from "ngx-snackbar";
 
 @NgModule({
   imports: [
@@ -19,6 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     HttpClientModule,
     NgbModule,
+    ReactiveFormsModule,
+    SnackbarModule,
     // ClipboardModule
   ],
   declarations: [
@@ -26,6 +30,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
+    HistoryComponent
   ]
 })
 

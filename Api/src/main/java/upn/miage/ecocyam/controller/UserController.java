@@ -24,7 +24,7 @@ public class UserController {
         try {
             List<User> users = new ArrayList<>();
             if(user==null)
-                userRepository.findAll().forEach(users::add);
+                users.addAll(userRepository.findAll());
             else
                 users.addAll(userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword()));
             if (users.isEmpty()) {
@@ -60,7 +60,8 @@ public class UserController {
         if (_user.isPresent()) {
             User user = _user.get();
             user.setEmail(userModel.getEmail());
-            user.setName(userModel.getName());
+            user.setFirstName(userModel.getFirstName());
+            user.setLastName(userModel.getLastName());
             user.setUsername(userModel.getUsername());
             user.setPassword(userModel.getPassword());
             return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);

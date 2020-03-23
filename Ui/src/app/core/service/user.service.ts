@@ -32,16 +32,26 @@ export class UserService {
   isLoggedIn() {
     // get the token from the localStorage as we have to work on this token.
     let token = localStorage.getItem('token');
-
     // check whether if token have something or it is null.
     return token;
   }
 
   logout(){
-    localStorage.removeItem('token');
+    localStorage.clear();
   }
 
   create(user: User) {
     return this.http.post(`${this.baseUrl}`,user) as Observable<User>;
+  }
+
+  update(user: User) {
+    let currentUserId = Number(localStorage.getItem('token'));
+    return this.http.put(`${this.baseUrl}/` + currentUserId,user) as Observable<User>;
+  }
+
+  getCurrentUser(){
+    let currentUserId = Number(localStorage.getItem('token'));
+    let url = this.baseUrl +'/'+ currentUserId;
+    return this.http.get(url) as Observable<User>;
   }
 }

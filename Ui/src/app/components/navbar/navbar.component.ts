@@ -2,6 +2,9 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
+import {UserService} from "../../core/service/user.service";
+import {User} from "../../core/model/user";
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-navbar',
@@ -12,12 +15,17 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  constructor(location: Location,  private element: ElementRef, private router: Router) {
+  user: User;
+
+  constructor(location: Location,  private element: ElementRef, private router: Router, private userService: UserService) {
     this.location = location;
   }
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
+    this.userService.getCurrentUser().pipe(first()).subscribe(data => {
+      this.user = data;
+    });
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
