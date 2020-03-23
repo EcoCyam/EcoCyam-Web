@@ -27,12 +27,10 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit() {
-    if((this.userService.isLoggedIn() !== "undefined") )
+    if((this.userService.isLoggedIn() !== null) )
     {
       this.router.navigate(['/dashboard']);
-    }
-    else
-    {
+    }else{
       this.router.navigate(['/login']);
     }
   }
@@ -48,9 +46,7 @@ export class LoginComponent implements OnInit{
     this.user = new User(this.loginForm.value);
     this.userService.login(this.user).pipe(first()).subscribe(data => {
       if(data){
-        localStorage.setItem("token" , data.username);
-        localStorage.setItem("email" , data.email);
-        localStorage.setItem("password" , data.password);
+        localStorage.setItem("token" , String(data[0].id));
         this.router.navigate(['/dashboard']);
       }else{
         alert("Merci de vérifier vos données");

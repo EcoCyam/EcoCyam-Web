@@ -21,7 +21,8 @@ export class RegisterComponent {
     private userService: UserService
   ){
     this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
@@ -36,9 +37,7 @@ export class RegisterComponent {
     }
     this.user = new User(this.registerForm.value);
     this.userService.create(this.user).pipe(first()).subscribe(data => {
-      localStorage.setItem("token" , data.username);
-      localStorage.setItem("email" , data.email);
-      localStorage.setItem("password" , data.password);
+      localStorage.setItem("token" , String(data.id));
       this.router.navigate(['/dashboard']);
     });
   }
