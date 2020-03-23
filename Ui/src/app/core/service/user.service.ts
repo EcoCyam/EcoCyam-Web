@@ -15,11 +15,11 @@ export class UserService {
   baseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = "/api/users";
+    this.baseUrl = "http://localhost:8080/api/users";
   }
 
-  findUser(user: User) {
-    return this.http.get(this.baseUrl, httpOptions) as Observable<User>;
+  login(user: User) {
+    return this.http.post(`${this.baseUrl}/userExist`,user) as Observable<User>;
   }
 
   private handleError<T>(result?: T) {
@@ -27,5 +27,21 @@ export class UserService {
       console.error(error); // log to console instead
       return of(result as T);
     };
+  }
+
+  isLoggedIn() {
+    // get the token from the localStorage as we have to work on this token.
+    let token = localStorage.getItem('token');
+
+    // check whether if token have something or it is null.
+    return token;
+  }
+
+  logout(){
+    localStorage.removeItem('token');
+  }
+
+  create(user: User) {
+    return this.http.post(`${this.baseUrl}`,user) as Observable<User>;
   }
 }
