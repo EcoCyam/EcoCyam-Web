@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit{
     this.user = new User(this.loginForm.value);
     this.userService.login(this.user).pipe(first()).subscribe(data => {
       if(data){
-        localStorage.setItem("token" , String(data[0].id));
+        localStorage.setItem("token" , String(data.id));
         this.router.navigate(['/dashboard']);
       }else{
         alert("Merci de vérifier vos données");

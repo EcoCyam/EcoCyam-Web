@@ -20,9 +20,16 @@ public class Item {
     @JoinColumn(name = "categoryId", referencedColumnName = "categoryId", nullable = false)
     private Category category;
     @ManyToMany(mappedBy = "items")
-    Set<User> users;
+    private Set<User> users;
 
     public Item() {
+    }
+
+    public Item(Item item) {
+        this.name = item.name;
+        this.overallScore = item.overallScore;
+        this.category = item.category;
+        this.users = item.users;
     }
 
     public Integer getItemId() {

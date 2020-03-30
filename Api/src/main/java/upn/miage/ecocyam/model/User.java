@@ -25,7 +25,7 @@ public class User {
     @ManyToMany
     @JoinTable(
             name = "userhistory",
-            joinColumns = @JoinColumn(name = "id"),
+            joinColumns = @JoinColumn(name = "userId"),
             inverseJoinColumns = @JoinColumn(name = "itemId"))
     private Set<Item> items;
 

@@ -23,10 +23,18 @@ public class Evaluation {
     @JoinColumn(name = "itemId", referencedColumnName = "itemId")
     private Item item;
     @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
 
     public Evaluation() {
+    }
+
+    public Evaluation(Evaluation evaluation) {
+        this.score = evaluation.score;
+        this.comment = evaluation.comment;
+        this.criteria = evaluation.criteria;
+        this.item = evaluation.item;
+        this.user = evaluation.user;
     }
 
     public Integer getEvaluationId() {

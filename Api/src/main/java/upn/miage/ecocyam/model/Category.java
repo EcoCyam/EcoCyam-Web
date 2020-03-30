@@ -19,7 +19,10 @@ public class Category {
     @OneToMany(mappedBy = "category")
     private Set<Item> item;
 
-    public Category() {
+    public Category(Category category) {
+        this.categoryId = category.categoryId;
+        this.name = category.name;
+        this.item = category.item;
     }
 
     public Integer getCategoryId() {

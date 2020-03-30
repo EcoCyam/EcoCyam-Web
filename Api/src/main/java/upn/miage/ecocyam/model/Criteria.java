@@ -20,6 +20,12 @@ public class Criteria {
     public Criteria() {
     }
 
+    public Criteria(Criteria criteria) {
+        this.criteriaId = criteria.criteriaId;
+        this.name = criteria.name;
+        this.evaluation = criteria.evaluation;
+    }
+
     public Integer getCriteriaId() {
         return criteriaId;
     }
