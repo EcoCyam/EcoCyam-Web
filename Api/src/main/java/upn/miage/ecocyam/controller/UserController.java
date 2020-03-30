@@ -45,9 +45,13 @@ public class UserController {
     @PostMapping()
     public ResponseEntity<User> createUser(@RequestBody User user) {
         try {
-            User _user = userRepository
-                    .save(new User(user));
-            return new ResponseEntity<>(_user, HttpStatus.CREATED);
+            List<User> users = new ArrayList<>(userRepository.findByEmail(user.getEmail()));
+            if (users.isEmpty()) {
+                User _user = userRepository
+                        .save(new User(user));
+                return new ResponseEntity<>(_user, HttpStatus.CREATED);
+            }
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
         }
