@@ -1,8 +1,11 @@
 package upn.miage.ecocyam.model;
 
 import javax.persistence.*;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
@@ -19,6 +22,12 @@ public class User {
     private String username;
     @Column(name = "password")
     private String password;
+    @ManyToMany
+    @JoinTable(
+            name = "userhistory",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "itemId"))
+    private Set<Item> items;
 
     public User(){}
 
@@ -76,5 +85,45 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Item> getItems() {
+        return items;
+    }
+
+    public void setItems(Set<Item> items) {
+        this.items = items;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", items=" + items +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getId().equals(user.getId()) &&
+                getEmail().equals(user.getEmail()) &&
+                getFirstName().equals(user.getFirstName()) &&
+                getLastName().equals(user.getLastName()) &&
+                getUsername().equals(user.getUsername()) &&
+                getPassword().equals(user.getPassword()) &&
+                getItems().equals(user.getItems());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getEmail(), getFirstName(), getLastName(), getUsername(), getPassword(), getItems());
     }
 }
