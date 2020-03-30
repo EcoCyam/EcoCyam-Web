@@ -85,13 +85,13 @@ public class UserController {
     }
 
     @PostMapping("/userExist")
-    public ResponseEntity<User> userExist(@RequestBody User user) {
+    public ResponseEntity<List<User>> userExist(@RequestBody User user) {
         try {
             List<User> users = new ArrayList<>(userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword()));
             if (users.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(users.get(0), HttpStatus.OK);
+            return new ResponseEntity<>(users, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
