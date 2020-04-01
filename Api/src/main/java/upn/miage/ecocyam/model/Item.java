@@ -16,6 +16,8 @@ public class Item {
     private String name;
     @Column(name = "overallscore")
     private Integer overallScore;
+    @Column(name = "barcode")
+    private String barcode;
     @ManyToOne
     @JoinColumn(name = "categoryId", referencedColumnName = "categoryId", nullable = false)
     private Category category;
@@ -30,6 +32,7 @@ public class Item {
         this.overallScore = item.overallScore;
         this.category = item.category;
         this.users = item.users;
+        this.barcode = item.barcode;
     }
 
     public Integer getItemId() {
@@ -72,12 +75,21 @@ public class Item {
         this.users = users;
     }
 
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
                 "itemId=" + itemId +
                 ", name='" + name + '\'' +
                 ", overallScore=" + overallScore +
+                ", barcode='" + barcode + '\'' +
                 ", category=" + category +
                 ", users=" + users +
                 '}';

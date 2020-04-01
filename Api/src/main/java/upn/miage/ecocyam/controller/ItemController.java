@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import upn.miage.ecocyam.model.Item;
+import upn.miage.ecocyam.model.SearchModel;
 import upn.miage.ecocyam.repository.ItemRepository;
 
 import java.util.ArrayList;
@@ -72,6 +73,25 @@ public class ItemController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+        }
+    }
+
+    @PostMapping("/search")
+    public ResponseEntity<List<Item>> searchItem(@RequestBody SearchModel model) {
+        try {
+            List<Item> categories = new ArrayList<>();
+
+            if(model.getBarcode() != null){
+                categories.addAll(itemRepository.findByBarcode(model.getBarcode()));
+            }else{
+                categories.addAll(itemRepository.findByNameContaining(model.getKeyword()));
+            }
+            if (categories.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(categories, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
