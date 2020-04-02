@@ -1,5 +1,6 @@
 package upn.miage.ecocyam.controller;
 
+import antlr.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,17 +80,17 @@ public class ItemController {
     @PostMapping("/search")
     public ResponseEntity<List<Item>> searchItem(@RequestBody SearchModel model) {
         try {
-            List<Item> categories = new ArrayList<>();
+            List<Item> searchedItems = new ArrayList<>();
 
-            if(model.getBarcode() != null){
-                categories.addAll(itemRepository.findByBarcode(model.getBarcode()));
+            if(model.getBarcode().trim().length()>0){
+                searchedItems.addAll(itemRepository.findByBarcode(model.getBarcode()));
             }else{
-                categories.addAll(itemRepository.findByNameContaining(model.getKeyword()));
+                searchedItems.addAll(itemRepository.findByNameContaining(model.getKeyword()));
             }
-            if (categories.isEmpty()) {
+            if (searchedItems.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(categories, HttpStatus.OK);
+            return new ResponseEntity<>(searchedItems, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
