@@ -15,7 +15,7 @@ public class Item {
     @Column(name = "name")
     private String name;
     @Column(name = "overallscore")
-    private Integer overallScore;
+    private Double overallScore;
     @Column(name = "barcode")
     private String barcode;
     @ManyToOne
@@ -51,11 +51,11 @@ public class Item {
         this.name = name;
     }
 
-    public Integer getOverallScore() {
+    public Double getOverallScore() {
         return overallScore;
     }
 
-    public void setOverallScore(Integer overallScore) {
+    public void setOverallScore(Double overallScore) {
         this.overallScore = overallScore;
     }
 
