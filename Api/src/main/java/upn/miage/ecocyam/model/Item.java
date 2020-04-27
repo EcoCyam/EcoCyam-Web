@@ -19,8 +19,9 @@ public class Item {
     private Double overallScore;
     @Column(name = "barcode")
     private String barcode;
-    @Column(name = "image")
-    private Blob image;
+    @Lob
+    @Column(name="image")
+    private byte[] image;
     @ManyToOne
     @JoinColumn(name = "categoryId", referencedColumnName = "categoryId", nullable = false)
     private Category category;
@@ -32,10 +33,16 @@ public class Item {
 
     public Item(Item item) {
         this.name = item.name;
-        this.overallScore = item.overallScore;
         this.category = item.category;
         this.users = item.users;
         this.barcode = item.barcode;
+        this.image = item.image;
+    }
+
+    public Item(ItemModel item){
+        this.name = item.getName();
+        this.barcode = item.getBarcode();
+        this.image = item.getImage();
     }
 
     public Integer getItemId() {
@@ -86,11 +93,11 @@ public class Item {
         this.barcode = barcode;
     }
 
-    public Blob getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(Blob image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

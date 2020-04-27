@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import upn.miage.ecocyam.model.Evaluation;
-import upn.miage.ecocyam.model.Item;
-import upn.miage.ecocyam.model.SearchModel;
+import upn.miage.ecocyam.model.*;
+import upn.miage.ecocyam.repository.CategoryRepository;
 import upn.miage.ecocyam.repository.EvaluationRepository;
 import upn.miage.ecocyam.repository.ItemRepository;
 
@@ -24,6 +23,9 @@ public class ItemController {
 
     @Autowired
     private EvaluationRepository evaluationRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @GetMapping()
     public ResponseEntity<List<Item>> getAllItem() {
@@ -47,10 +49,13 @@ public class ItemController {
     }
 
     @PostMapping()
-    public ResponseEntity<Item> createItem(@RequestBody Item item) {
+    public ResponseEntity<Item> createItem(@RequestBody ItemModel itemModel) {
         try {
+            Optional<Category> _category = categoryRepository.findById(itemModel.getCategoryId());
+            Item item = new Item(itemModel);
+            _category.ifPresent(item::setCategory);
             Item _item = itemRepository
-                    .save(new Item(item));
+                    .save(item);
             calculateAndSetItemOverallScore(_item);
             return new ResponseEntity<>(_item, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -59,14 +64,15 @@ public class ItemController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Item> updateItem(@RequestBody Item itemModel, @PathVariable int id) {
+    public ResponseEntity<Item> updateItem(@RequestBody ItemModel itemModel, @PathVariable int id) {
         Optional<Item> _item = itemRepository.findById(id);
+        Optional<Category> _category = categoryRepository.findById(itemModel.getCategoryId());
 
         if (_item.isPresent()) {
             Item item = _item.get();
             item.setName(itemModel.getName());
-            item.setCategory(itemModel.getCategory());
-            item.setUsers(itemModel.getUsers());
+            _category.ifPresent(item::setCategory);
+            item.setImage(itemModel.getImage());
             calculateAndSetItemOverallScore(item);
             return new ResponseEntity<>(itemRepository.save(item), HttpStatus.OK);
         } else {
