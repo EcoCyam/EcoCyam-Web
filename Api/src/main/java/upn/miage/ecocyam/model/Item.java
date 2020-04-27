@@ -1,6 +1,7 @@
 package upn.miage.ecocyam.model;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,6 +19,8 @@ public class Item {
     private Double overallScore;
     @Column(name = "barcode")
     private String barcode;
+    @Column(name = "image")
+    private Blob image;
     @ManyToOne
     @JoinColumn(name = "categoryId", referencedColumnName = "categoryId", nullable = false)
     private Category category;
@@ -81,6 +84,14 @@ public class Item {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    public Blob getImage() {
+        return image;
+    }
+
+    public void setImage(Blob image) {
+        this.image = image;
     }
 
     @Override
