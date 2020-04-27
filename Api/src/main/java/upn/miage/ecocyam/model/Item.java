@@ -1,6 +1,7 @@
 package upn.miage.ecocyam.model;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,9 +16,12 @@ public class Item {
     @Column(name = "name")
     private String name;
     @Column(name = "overallscore")
-    private Integer overallScore;
+    private Double overallScore;
     @Column(name = "barcode")
     private String barcode;
+    @Lob
+    @Column(name="image")
+    private byte[] image;
     @ManyToOne
     @JoinColumn(name = "categoryId", referencedColumnName = "categoryId", nullable = false)
     private Category category;
@@ -29,10 +33,16 @@ public class Item {
 
     public Item(Item item) {
         this.name = item.name;
-        this.overallScore = item.overallScore;
         this.category = item.category;
         this.users = item.users;
         this.barcode = item.barcode;
+        this.image = item.image;
+    }
+
+    public Item(ItemModel item){
+        this.name = item.getName();
+        this.barcode = item.getBarcode();
+        this.image = item.getImage();
     }
 
     public Integer getItemId() {
@@ -51,11 +61,11 @@ public class Item {
         this.name = name;
     }
 
-    public Integer getOverallScore() {
+    public Double getOverallScore() {
         return overallScore;
     }
 
-    public void setOverallScore(Integer overallScore) {
+    public void setOverallScore(Double overallScore) {
         this.overallScore = overallScore;
     }
 
@@ -81,6 +91,14 @@ public class Item {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 
     @Override

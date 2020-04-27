@@ -11,16 +11,16 @@ public class Evaluation {
     @Column(name = "evaluationId")
     private Integer evaluationId;
     @Column(name = "score")
-    private Integer score;
+    private Double score;
     @Column(name = "comment")
     private String comment;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "criteriaId", referencedColumnName = "criteriaId")
     private Criteria criteria;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "itemId", referencedColumnName = "itemId")
     private Item item;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
 
@@ -43,11 +43,11 @@ public class Evaluation {
         this.evaluationId = evaluationId;
     }
 
-    public Integer getScore() {
+    public Double getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Double score) {
         this.score = score;
     }
 

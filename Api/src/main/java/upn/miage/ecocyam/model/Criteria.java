@@ -14,16 +14,12 @@ public class Criteria {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "criteria")
-    private Evaluation evaluation;
-
     public Criteria() {
     }
 
     public Criteria(Criteria criteria) {
         this.criteriaId = criteria.criteriaId;
         this.name = criteria.name;
-        this.evaluation = criteria.evaluation;
     }
 
     public Integer getCriteriaId() {
@@ -42,20 +38,11 @@ public class Criteria {
         this.name = name;
     }
 
-    public Evaluation getEvaluation() {
-        return evaluation;
-    }
-
-    public void setEvaluation(Evaluation evaluation) {
-        this.evaluation = evaluation;
-    }
-
     @Override
     public String toString() {
         return "Criteria{" +
                 "criteriaId=" + criteriaId +
-                ", name='" + name + '\'' +
-                ", evaluation=" + evaluation +
+                ", name='" + name +
                 '}';
     }
 }
