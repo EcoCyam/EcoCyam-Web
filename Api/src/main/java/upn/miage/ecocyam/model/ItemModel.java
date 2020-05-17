@@ -6,6 +6,9 @@ public class ItemModel {
     private String barcode;
     private byte[] image;
     private int categoryId;
+    private double note1;
+    private double note2;
+    private double note3;
 
     public ItemModel(String name, Double overallScore, String barcode, byte[] image, int categoryId) {
         this.name = name;
@@ -13,6 +16,9 @@ public class ItemModel {
         this.barcode = barcode;
         this.image = image;
         this.categoryId = categoryId;
+        this.note1 = note1;
+        this.note2 = note2;
+        this.note3 = note3;
     }
 
     public String getName() {
@@ -53,5 +59,29 @@ public class ItemModel {
 
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public double getNote1() {
+        return note1;
+    }
+
+    public void setNote1(double note1) {
+        this.note1 = note1;
+    }
+
+    public double getNote2() {
+        return note2;
+    }
+
+    public void setNote2(double note2) {
+        this.note2 = note2;
+    }
+
+    public double getNote3() {
+        return note3;
+    }
+
+    public void setNote3(double note3) {
+        this.note3 = note3;
     }
 }

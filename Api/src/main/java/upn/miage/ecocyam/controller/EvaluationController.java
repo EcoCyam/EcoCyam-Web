@@ -38,6 +38,15 @@ public class EvaluationController {
         return _evaluation.map(evaluation -> new ResponseEntity<>(evaluation, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/item/{id}")
+    public ResponseEntity<List<Evaluation>> getEvaluationByItemId(@PathVariable("id") int id) {
+        List<Evaluation> evaluations = new ArrayList<>(evaluationRepository.findByItem_ItemId(id));
+        if (evaluations.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(evaluations, HttpStatus.OK);
+    }
+
     @PostMapping()
     public ResponseEntity<Evaluation> createEvaluation(@RequestBody Evaluation evaluation) {
         try {

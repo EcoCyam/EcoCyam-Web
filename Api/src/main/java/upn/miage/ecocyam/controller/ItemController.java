@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import upn.miage.ecocyam.model.*;
 import upn.miage.ecocyam.repository.CategoryRepository;
+import upn.miage.ecocyam.repository.CriteriaRepository;
 import upn.miage.ecocyam.repository.EvaluationRepository;
 import upn.miage.ecocyam.repository.ItemRepository;
 
@@ -26,6 +27,9 @@ public class ItemController {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private CriteriaRepository criteriaRepository;
 
     @GetMapping()
     public ResponseEntity<List<Item>> getAllItem() {
@@ -56,6 +60,7 @@ public class ItemController {
             _category.ifPresent(item::setCategory);
             Item _item = itemRepository
                     .save(item);
+            setEvaluationForItem(itemModel, item);
             calculateAndSetItemOverallScore(_item);
             return new ResponseEntity<>(_item, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -108,6 +113,32 @@ public class ItemController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    private void setEvaluationForItem(ItemModel itemModel, Item item){
+
+        List<Criteria> criterias = new ArrayList<>(criteriaRepository.findAll());
+
+        //note 1
+        Evaluation evaluation1 = new Evaluation();
+        evaluation1.setCriteria(criterias.get(0));
+        evaluation1.setItem(item);
+        evaluation1.setScore(itemModel.getNote1());
+        evaluationRepository.save(evaluation1);
+
+        //note2
+        Evaluation evaluation2 = new Evaluation();
+        evaluation2.setCriteria(criterias.get(1));
+        evaluation2.setItem(item);
+        evaluation2.setScore(itemModel.getNote2());
+        evaluationRepository.save(evaluation2);
+
+        //note3
+        Evaluation evaluation3 = new Evaluation();
+        evaluation3.setCriteria(criterias.get(2));
+        evaluation3.setItem(item);
+        evaluation3.setScore(itemModel.getNote3());
+        evaluationRepository.save(evaluation3);
     }
 
     private void calculateAndSetItemOverallScore(Item item){

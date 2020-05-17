@@ -15,7 +15,8 @@ export class UserService {
   baseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = "http://localhost:8080/api/users";
+    //this.baseUrl = "http://localhost:8080/api/users";
+    this.baseUrl = "http://ecocyam-web.cfapps.io/api/users";
   }
 
   login(user: User) {
