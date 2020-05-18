@@ -1,8 +1,6 @@
 package upn.miage.ecocyam.model;
 
 import javax.persistence.*;
-import java.sql.Blob;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -42,7 +40,6 @@ public class Item {
     public Item(ItemModel item){
         this.name = item.getName();
         this.barcode = item.getBarcode();
-        this.image = item.getImage();
     }
 
     public Integer getItemId() {

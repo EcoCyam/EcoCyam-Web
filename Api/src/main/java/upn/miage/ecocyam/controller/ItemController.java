@@ -11,6 +11,7 @@ import upn.miage.ecocyam.repository.EvaluationRepository;
 import upn.miage.ecocyam.repository.ItemRepository;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +59,7 @@ public class ItemController {
             Optional<Category> _category = categoryRepository.findById(itemModel.getCategoryId());
             Item item = new Item(itemModel);
             _category.ifPresent(item::setCategory);
+            item.setImage(Base64.getDecoder().decode(itemModel.getImage()));
             Item _item = itemRepository
                     .save(item);
             setEvaluationForItem(itemModel, item);
@@ -77,7 +79,7 @@ public class ItemController {
             Item item = _item.get();
             item.setName(itemModel.getName());
             _category.ifPresent(item::setCategory);
-            item.setImage(itemModel.getImage());
+            item.setImage(Base64.getDecoder().decode(itemModel.getImage()));
             calculateAndSetItemOverallScore(item);
             return new ResponseEntity<>(itemRepository.save(item), HttpStatus.OK);
         } else {
