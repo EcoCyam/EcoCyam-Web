@@ -1,6 +1,7 @@
 package upn.miage.ecocyam.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "evaluation")
@@ -33,6 +34,11 @@ public class Evaluation {
         this.criteria = evaluation.criteria;
         this.item = evaluation.item;
         this.user = evaluation.user;
+    }
+
+    public Evaluation(EvaluationModel evaluation){
+        this.score = evaluation.getScore();
+        this.comment = evaluation.getComment();
     }
 
     public Integer getEvaluationId() {
