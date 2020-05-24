@@ -1,6 +1,7 @@
 package upn.miage.ecocyam.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "criteria")
@@ -45,4 +46,5 @@ public class Criteria {
                 ", name='" + name +
                 '}';
     }
+
 }
